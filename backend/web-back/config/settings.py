@@ -89,8 +89,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'staticAppList',
+        'USER': 'mii4a',
+        'PASSWORD': 'mii4a2501',
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
 
@@ -138,7 +142,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # The dir to refer to static files in the prod env.[added]
-STATIC_ROOT = [os.path.join(BASE_DIR, 'staticfiles')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media file path (files which is uploaded by user) [added]
 MEDIR_URL = '/media'
@@ -151,6 +155,7 @@ REST_FRAMEWORK = {
 }
 
 # CORS
-CORS_ORIGIN_WHITELIST = {
-  'http://localhost',
-}
+CORS_ORIGIN_WHITELIST = ['http://localhost:8000']
+
+#AUTH_USER
+AUTH_USER_MODEL = 'staticApp.User'

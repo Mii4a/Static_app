@@ -38,6 +38,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     # customed user model
+    email = models.EmailField('email_address', unique=True)
     username = models.CharField(max_length=30)
     is_staff = models.BooleanField('is_staff', default=False)
     is_superuser = models.BooleanField('is_active', default=True)
@@ -45,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 

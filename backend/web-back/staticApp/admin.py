@@ -4,13 +4,18 @@ from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
 class CustomUserAdmin(UserAdmin):
-  list_display = list(UserAdmin.list_display) + ['custome_field']
-  fieldsets = UserAdmin.fieldsets + (
-    (None, {'fields': ('custom_field',)}),
+  fieldsets = (
+    (None, {'fields': ('email', 'password', 'username')}),
+    ('Permissions', {'fields': ('is_staff', 'is_superuser')})
   )
-  add_fieldsets = UserAdmin.add_fieldsets + (
-    (None, {'fields': ('custom_field',)}),
+  add_fieldsets = (
+    (None, {
+      'classes': ('wide',),
+      'fields': ('email', 'password1', 'password2'),
+      }),
   )
+  list_display = ('email', 'is_staff')
+  list_filter  = ('is_staff', 'is_superuser')
 
 admin.site.register(User, CustomUserAdmin)
 
