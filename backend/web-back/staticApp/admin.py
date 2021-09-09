@@ -11,10 +11,10 @@ class CustomUserAdmin(UserAdmin):
   add_fieldsets = (
     (None, {
       'classes': ('wide',),
-      'fields': ('email', 'password1', 'password2'),
+      'fields': ('username', 'email', 'password1', 'password2'),
       }),
   )
-  list_display = ('email', 'is_staff')
+  list_display = ('email', 'username', 'is_staff')
   list_filter  = ('is_staff', 'is_superuser')
 
 admin.site.register(User, CustomUserAdmin)

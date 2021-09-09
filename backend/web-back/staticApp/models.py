@@ -12,11 +12,11 @@ class UserManager(BaseUserManager):
     # customed user manager model
     use_in_migrations = True
 
-    def _craete_user(self, username, email, password, **extrafields):
+    def _create_user(self, username, email, password, **extra_fields):
         if not username:
             raise ValueError('The given username must be set')
-        email = self.normalize_email(email)
         username = self.model.normalize_username(username)
+        email = self.normalize_email(email)
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self.db)
@@ -34,12 +34,12 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_staff=True')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True')
-        return self._create_user(username, password, **extrafields)
+        return self._create_user(username, email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
     # customed user model
-    email = models.EmailField('email_address', unique=True)
-    username = models.CharField(max_length=30)
+    username = models.CharField(max_length=30, null=True)
+    email = models.EmailField('email_address', unique=True, null=True)
     is_staff = models.BooleanField('is_staff', default=False)
     is_superuser = models.BooleanField('is_active', default=True)
     data_joined = models.DateTimeField('data_joined', default=timezone.now)
@@ -48,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     class Meta:
         verbose_name="user"
