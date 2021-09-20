@@ -24,7 +24,7 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))  #added
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7(+r-tyo9827lz=3ai_4^yo*xwt(lzkf7a*-52-j*mzz4#p3hs'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -91,9 +91,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'staticAppList',
-        'USER': 'mii4a',
-        'PASSWORD': 'mii4a2501',
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
         'HOST': 'db',
         'PORT': '3306',
     }
