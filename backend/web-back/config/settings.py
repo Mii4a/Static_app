@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # local [added] 
+    
     'staticApp.apps.StaticappConfig',
+    'fourierTransform.apps.FouriertransformConfig'
 ]
 
 MIDDLEWARE = [
