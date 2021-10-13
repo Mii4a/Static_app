@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # local [added] 
-    
+    'django_cleanup',
     'staticApp.apps.StaticappConfig',
     'fourierTransform.apps.FouriertransformConfig'
 ]
