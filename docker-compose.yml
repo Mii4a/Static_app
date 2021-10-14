@@ -25,6 +25,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - static_volume:/code/staticfiles # <-- bind the static volume
+      - site_packages:/usr/local/lib/python3.7/site-packages
     ports:
       - "8080:80"
     depends_on:
@@ -77,3 +78,4 @@ networks:
     driver: bridge
 volumes:
   static_volume:
+  site_packages:
