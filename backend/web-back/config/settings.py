@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # local [added] 
     'staticApp.apps.StaticappConfig',
+    'fileUpload.apps.FileuploadConfig',
     'fourierTransform.apps.FouriertransformConfig'
 ]
 
