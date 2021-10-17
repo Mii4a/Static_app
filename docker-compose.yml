@@ -20,10 +20,12 @@ services:
       - db
   backend-server:
     container_name: nginx_back
+    env_file: ./backend/nginx/.env
     build:
       context: ./backend/nginx/.
       dockerfile: Dockerfile.dev
     volumes:
+      - ./backend/nginx/conf.d:/etc/nginx/conf.d
       - static_volume:/code/staticfiles # <-- bind the static volume
       - site_packages:/usr/local/lib/python3.7/site-packages
     ports:
@@ -61,9 +63,12 @@ services:
       - frontend_network
   fronend-server:
     container_name: nginx_frontend
+    env_file: ./backend/nginx/.env
     build:
       context: ./frontend/nginx/.
       dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend/nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "80:80"
     depends_on:
