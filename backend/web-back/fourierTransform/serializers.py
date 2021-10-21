@@ -4,4 +4,4 @@ from .models import FourierTransform
 class FourierTransformSerializer(serializers.ModelSerializer):
   class Meta():
     model = FourierTransform
-    fields = ('title', 'description', 'created_at', 'sf') 
+    fields = ('id', 'upload', 'title', 'description', 'created_at', 'sf', 'is_exclude', 'line_is_specified', 'spec_line') 

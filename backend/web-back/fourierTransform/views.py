@@ -7,17 +7,22 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 
 from .serializers import FourierTransformSerializer
+from .models import FourierTransform
 
-class FourierTransformView(APIView):
-  parser_classes = (MultiPartParser, FormParser)
+class FileUploadView(generics.ListAPIView):
+  queryset = FourierTransform.objects.all()
+  serializer_class = FourierTransformSerializer
 
-  def post(self, request, *args, *ksargs):
-    fft_serializer = FourierTransformSerializer(data=request.data)
-    if fft_serializer.is_valid():
-      fft_serializer.save()
-      return response(fft_serializer.data, status=status.HTTP_201_CREATED)
-    else
-      return response(fft_serializer.error, status=status.HTTP_400_BAD_REQUEST)
+# class FourierTransformView(APIView):
+#   parser_classes = (MultiPartParser, FormParser)
+
+#   def post(self, request, *args, *ksargs):
+#     fft_serializer = FourierTransformSerializer(data=request.data)
+#     if fft_serializer.is_valid():
+#       fft_serializer.save()
+#       return response(fft_serializer.data, status=status.HTTP_201_CREATED)
+#     else
+#       return response(fft_serializer.error, status=status.HTTP_400_BAD_REQUEST)
   
-  def index(request):
-    if request.method == "POST"
+#   def index(request):
+#     if request.method == "POST"
