@@ -19,19 +19,22 @@ def dir_path_name(instance, filename):
     print('this file is .csv')
   return path
 
+class FileUpload(models.Model):
+  upload = models.FileField(upload_to=dir_path_name, validators=[FileExtensionValidator(['mat', 'csv', ])])
+
+  def file_name(self):
+    path = os.path.basename(self.upload.name)
+    return path
+
 
 # Create your models here.
 class FourierTransform(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
   
-  upload = models.FileField(upload_to=dir_path_name)
   title = models.CharField(max_length=100, null=True, blank=True)
   description = models.TextField(blank=True, null=True)
   sf = models.PositiveIntegerField(blank=False, null=False, default=500)
   is_excluded = models.BooleanField("exclude_10s", default=True)
   line_is_specified = models.BooleanField("line_is_specified", default=False)
   spec_line = models.PositiveIntegerField(blank=True, null=True)
-
-  def file_name(self)
-    path = os.path.basename(self.upload.name)
-    return path
+  base_file = models.ForeignKey(FileUpload, on_delete=models.CASCADE)
